@@ -18,7 +18,7 @@ class CollectionDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = (collection?.name ?? "Collection") + " Details"
+        navigationItem.title = "Collection Details"
         getProductIDs()
         tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: "listCell")
         tableView.register(UINib(nibName: "CardTableViewCell", bundle: nil), forCellReuseIdentifier: "cardCell")
