@@ -18,10 +18,13 @@ class CollectionDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = (collection?.name ?? "Collection") + " Details"
         getProductIDs()
-        
         tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: "listCell")
-        
+        tableView.register(UINib(nibName: "CardTableViewCell", bundle: nil), forCellReuseIdentifier: "cardCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 250
+
     }
     
     @IBAction func didPressDismiss(_ sender: UIButton) {
@@ -32,9 +35,6 @@ class CollectionDetailsViewController: UIViewController {
         var url = "https://shopicruit.myshopify.com/admin/collects.json?collection_id="
         url.append(String(collection!.id))
         url.append("&page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6")
-        
-        print(url)
-        
         
         let urlRequest = URLRequest(url: URL(string: url)!)
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -54,18 +54,10 @@ class CollectionDetailsViewController: UIViewController {
                 if let collectsFromJSON = json["collects"] as? [[String: AnyObject]]
                 {
                     for collectFromJSON in collectsFromJSON {
-                        print(collectFromJSON["product_id"])
                         self.productIDs.append((collectFromJSON["product_id"] as? Int)!)
                     }
                 }
                 self.getProductDetails()
-
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                    self.tableView.separatorInset = UIEdgeInsets.zero
-//                    self.tableView.delegate = self
-//                    self.tableView.dataSource = self
-//                }
                 
             } catch let error {
                 print(error)
@@ -78,17 +70,14 @@ class CollectionDetailsViewController: UIViewController {
     func getProductDetails() {
         var url = "https://shopicruit.myshopify.com/admin/products.json?ids="
         url.append(String(productIDs[0]))
-        for id in productIDs {
-            if id == productIDs[0] {
-                continue
-            }
+        for id in productIDs.dropFirst() {
             url.append(",")
             url.append(String(id))
         }
         url.append("&page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6")
         
         let urlRequest = URLRequest(url: URL(string: url)!)
-        let taskA = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription)
                 print("error in get")
@@ -102,7 +91,6 @@ class CollectionDetailsViewController: UIViewController {
             
             do {
                 
-                print("got json")
                 let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String : AnyObject]
                 if let productsFromJSON = json["products"] as? [[String: AnyObject]]
                 {
@@ -113,7 +101,6 @@ class CollectionDetailsViewController: UIViewController {
                         if let id = productFromJSON["id"] as? Int,
                             let name = productFromJSON["title"] as? String
                         {
-                            print(name)
                             product.id = id
                             product.name = name
                         }
@@ -140,24 +127,36 @@ class CollectionDetailsViewController: UIViewController {
                 print(error)
             }
 
-        }.resume()
+        }
+        task.resume()
     }
 }
 
 extension CollectionDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(products.count)
-        return products.count
+        return products.count + 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return UITableView.automaticDimension
+        }
         return 95
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell") as! CardTableViewCell
+            cell.imageCollection.downloadImage(from: (collection?.imageURL)!)
+            cell.labelTitle.text = collection?.name
+            cell.labelDescription.text = collection?.description
+            
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "listCell") as! ListCell
-        cell.labelName.text = products[indexPath.row].name
-        cell.labelQuantity.text = String(products[indexPath.row].quantity)
+        cell.labelName.text = products[indexPath.row - 1].name
+        cell.labelQuantity.text = "Inventory: " + String(products[indexPath.row - 1].quantity)
         cell.labelCollection.text = collection?.name
         cell.imageCollection.downloadImage(from: (collection?.imageURL)!)
 

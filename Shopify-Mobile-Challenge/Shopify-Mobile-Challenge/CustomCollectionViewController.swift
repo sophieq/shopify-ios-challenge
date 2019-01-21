@@ -17,6 +17,7 @@ class CustomCollectionViewController: UIViewController {
         super.viewDidLoad()
         getCollections()
         
+        navigationItem.title = "Custom Collections"
         tableView.register(UINib(nibName: "CustomCollectionCell", bundle: nil), forCellReuseIdentifier: "customCollectionCell")
         
     }
@@ -41,15 +42,17 @@ class CustomCollectionViewController: UIViewController {
                 if let collectionsFromJSON = json["custom_collections"] as? [[String: AnyObject]]
                 {
                     for collectionFromJSON in collectionsFromJSON {
-                        var collection = Collection(name: "", id: 0, product_ids: [], imageURL: "")
+                        var collection = Collection(name: "", id: 0, product_ids: [], imageURL: "", description: "")
                         
                         if let name = collectionFromJSON["title"] as? String,
                             let id = collectionFromJSON["id"] as? Int,
-                            let imageURL = collectionFromJSON["image"]?["src"] as? String
+                            let imageURL = collectionFromJSON["image"]?["src"] as? String,
+                            let description = collectionFromJSON["body_html"] as? String
                         {
                             collection.name = name
                             collection.id = id
                             collection.imageURL = imageURL
+                            collection.description = description
                         }
                         self.collections.append(collection)
                     }
@@ -91,6 +94,6 @@ extension CustomCollectionViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = CollectionDetailsViewController()
         vc.collection = collections[indexPath.row]
-        present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

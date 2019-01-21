@@ -9,10 +9,11 @@
 import UIKit
 
 class CardTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
+    @IBOutlet weak var imageCollection: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

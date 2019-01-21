@@ -13,4 +13,5 @@ struct Collection {
     var id: Int
     var product_ids: [Int]
     var imageURL: String
+    var description: String
 }

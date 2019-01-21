@@ -11,7 +11,6 @@
 		AD749C4E21EEF7D0004250BE /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD749C4C21EEF7D0004250BE /* CardTableViewCell.swift */; };
 		AD749C4F21EEF7D0004250BE /* CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD749C4D21EEF7D0004250BE /* CardTableViewCell.xib */; };
 		AD782DE821EAC3E100C3FADA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD782DE721EAC3E100C3FADA /* AppDelegate.swift */; };
-		AD782DED21EAC3E100C3FADA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD782DEB21EAC3E100C3FADA /* Main.storyboard */; };
 		AD782DEF21EAC3E600C3FADA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD782DEE21EAC3E600C3FADA /* Assets.xcassets */; };
 		AD782DF221EAC3E600C3FADA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD782DF021EAC3E600C3FADA /* LaunchScreen.storyboard */; };
 		AD782DFD21EAC3E700C3FADA /* Shopify_Mobile_ChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD782DFC21EAC3E700C3FADA /* Shopify_Mobile_ChallengeTests.swift */; };
@@ -51,7 +50,6 @@
 		AD749C4D21EEF7D0004250BE /* CardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardTableViewCell.xib; sourceTree = "<group>"; };
 		AD782DE421EAC3E000C3FADA /* Shopify-Mobile-Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopify-Mobile-Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD782DE721EAC3E100C3FADA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AD782DEC21EAC3E100C3FADA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD782DEE21EAC3E600C3FADA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD782DF121EAC3E600C3FADA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD782DF321EAC3E600C3FADA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +96,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD00E81821F548D80051B0E8 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				AD782E1A21EAC77900C3FADA /* CustomCollectionViewController.xib */,
+				AD782E2421EBFC0500C3FADA /* CollectionDetailsViewController.xib */,
+				AD782E1E21EAC7B500C3FADA /* CustomCollectionCell.xib */,
+				AD782E2821EC002A00C3FADA /* ListCell.xib */,
+				AD749C4D21EEF7D0004250BE /* CardTableViewCell.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
 		AD782DDB21EAC3E000C3FADA = {
 			isa = PBXGroup;
 			children = (
@@ -126,13 +136,8 @@
 				AD782E1D21EAC7B500C3FADA /* CustomCollectionCell.swift */,
 				AD782E2721EC002A00C3FADA /* ListCell.swift */,
 				AD749C4C21EEF7D0004250BE /* CardTableViewCell.swift */,
-				AD782E1A21EAC77900C3FADA /* CustomCollectionViewController.xib */,
-				AD782E2421EBFC0500C3FADA /* CollectionDetailsViewController.xib */,
-				AD782E1E21EAC7B500C3FADA /* CustomCollectionCell.xib */,
-				AD782E2821EC002A00C3FADA /* ListCell.xib */,
-				AD749C4D21EEF7D0004250BE /* CardTableViewCell.xib */,
+				AD00E81821F548D80051B0E8 /* Xibs */,
 				AD782DE721EAC3E100C3FADA /* AppDelegate.swift */,
-				AD782DEB21EAC3E100C3FADA /* Main.storyboard */,
 				AD782E2121EACA5A00C3FADA /* Collection.swift */,
 				AD782E2B21EC145200C3FADA /* Product.swift */,
 				AD749C4A21EEF41C004250BE /* Extensions.swift */,
@@ -271,7 +276,6 @@
 				AD749C4F21EEF7D0004250BE /* CardTableViewCell.xib in Resources */,
 				AD782E2621EBFC0500C3FADA /* CollectionDetailsViewController.xib in Resources */,
 				AD782E2021EAC7B500C3FADA /* CustomCollectionCell.xib in Resources */,
-				AD782DED21EAC3E100C3FADA /* Main.storyboard in Resources */,
 				AD782E2A21EC002A00C3FADA /* ListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,14 +345,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		AD782DEB21EAC3E100C3FADA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD782DEC21EAC3E100C3FADA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		AD782DF021EAC3E600C3FADA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
